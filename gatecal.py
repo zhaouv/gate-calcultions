@@ -71,8 +71,8 @@ def addonelist(onelist):
                             oneqc.add_gate(gate, targets=j, controls=k)
     return oneqc
 
-
-
+import time
+tstart = time.time()
 gatelist=init("gateforcal.csv")
 npip=len(gatelist[0])
 #lenpip=len(gatelist)
@@ -85,7 +85,10 @@ for gate in qcp:
     propagator=gate*propagator
 #propagator.dag()[0][0][0b01000]
 output=abs(propagator.dag()[0][0]**2)
+tend = time.time()
+print(propagator)
 print(output)
+print("Using %s seconds"%(tend-tstart))
 try:#输出线路到pdf和tex,用于检查
     qc.png
 except:
