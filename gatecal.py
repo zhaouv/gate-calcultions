@@ -80,14 +80,29 @@ qc=QubitCircuit(npip)
 for onelist in gatelist:
     qc.gates.extend(addonelist(onelist).gates)
 qcp=qc.propagators()
+'''
 propagator=qcp.pop(0)
 for gate in qcp:
     propagator=gate*propagator
 #propagator.dag()[0][0][0b01000]
 output=abs(propagator.dag()[0][0]**2)
+'''
+
+qcp=qc.propagators()
+#np.transpose(np.transpose(qcp.pop(0).data)[0])
+def calcal(qcp):
+    propagator=np.transpose(np.transpose(qcp.pop(0).data)[0])
+    for gate in qcp:
+        propagator=gate.data*propagator
+    return propagator
+#propagator.dag()[0][0][0b01000]
+propagator=calcal(qcp)
+#output=abs(propagator.dag()[0][0]**2)
+
 tend = time.time()
 print(propagator)
-print(output)
+
+#print(output)
 print("Using %s seconds"%(tend-tstart))
 try:#输出线路到pdf和tex,用于检查
     qc.png
