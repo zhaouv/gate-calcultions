@@ -62,9 +62,9 @@ def addonelist(onelist):
                             oneqc.add_gate(gate, targets=[j,k])
                         elif gate=="CZ":
                             if int(num)%2:
-                                oneqc.add_gate("CRZ", targets=k, controls=j,arg_value=np.pi,arg_label=180)
+                                oneqc.add_gate("CSIGN", targets=k, controls=j,arg_value=np.pi,arg_label=180)
                             else:
-                                oneqc.add_gate("CRZ", targets=j, controls=k,arg_value=np.pi,arg_label=180)
+                                oneqc.add_gate("CSIGN", targets=j, controls=k,arg_value=np.pi,arg_label=180)
                         elif int(num)%2:
                             oneqc.add_gate(gate, targets=k, controls=j)
                         else:
